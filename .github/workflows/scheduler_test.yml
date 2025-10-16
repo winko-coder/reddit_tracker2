@@ -1,0 +1,13 @@
+name: Scheduler Test
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/10 * * * *'  # alle 10 Minuten zum Testen
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print time
+        run: echo "Scheduler is running at $(date)"
