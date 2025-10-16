@@ -1,0 +1,29 @@
+name: Reddit Hype Tracker
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # jede volle Stunde
+  workflow_dispatch:       # manuell startbar
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: pip install praw textblob pandas requests
+      - name: Run tracker
+        env:
+          CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python reddit_hype_tracker.py
+      - name: Commit updated CSV
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add reddit_trends.csv || true
+          git commit -m "update trend data" || true
+          git push || true
