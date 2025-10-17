@@ -2,8 +2,6 @@ name: Scheduler Test
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/10 * * * *'  # alle 10 Minuten zum Testen
 
 jobs:
   ping:
