@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: pip install praw textblob pandas requests
+        run: pip install praw textblob pandas yfinance matplotlib requests numpy
       - name: Run tracker
         env:
           CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
