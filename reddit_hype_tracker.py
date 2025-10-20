@@ -51,11 +51,16 @@ COMMON_WORDS = set([
 # -------------------------
 # Environment / Credentials
 # -------------------------
-REDDIT_CLIENT_ID = os.getenv("REDDIT_CLIENT_ID")
-REDDIT_CLIENT_SECRET = os.getenv("REDDIT_CLIENT_SECRET")
-REDDIT_USER_AGENT = os.getenv("REDDIT_USER_AGENT", "reddit-hype-bot:v1")
-BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+# === Reddit API Setup ===
+reddit = praw.Reddit(
+    client_id=os.getenv("CLIENT_ID"),
+    client_secret=os.getenv("CLIENT_SECRET"),
+    user_agent=os.getenv("USER_AGENT")
+)
+
+# === Telegram Setup ===
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
 
 if not (REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET and BOT_TOKEN and CHAT_ID):
     print("ERROR: Missing env vars. Please set REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID")
