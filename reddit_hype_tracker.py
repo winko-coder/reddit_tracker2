@@ -194,9 +194,9 @@ def technical_signals_from_history(hist_df):
 def main():
     # init reddit client
     reddit_client = praw.Reddit(
-        client_id=REDDIT_CLIENT_ID,
-        client_secret=REDDIT_CLIENT_SECRET,
-        user_agent=REDDIT_USER_AGENT
+        client_id=os.getenv("CLIENT_ID"),
+        client_secret=os.getenv("CLIENT_SECRET"),
+        user_agent=os.getenv("USER_AGENT")
     )
 
     ts_now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
