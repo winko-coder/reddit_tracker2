@@ -52,11 +52,9 @@ COMMON_WORDS = set([
 # Environment / Credentials
 # -------------------------
 # === Reddit API Setup ===
-reddit = praw.Reddit(
-    client_id=os.getenv("CLIENT_ID"),
-    client_secret=os.getenv("CLIENT_SECRET"),
-    user_agent=os.getenv("USER_AGENT")
-)
+REDDIT_CLIENT_ID=os.getenv("CLIENT_ID"),
+REDDIT_CLIENT_SECRET=os.getenv("CLIENT_SECRET"),
+REDDIT_USER_AGENT=os.getenv("USER_AGENT")
 
 # === Telegram Setup ===
 BOT_TOKEN = os.getenv("BOT_TOKEN")
