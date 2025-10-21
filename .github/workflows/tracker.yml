@@ -1,16 +1,21 @@
 name: Reddit Hype Tracker
 
 on:
-  workflow_dispatch:       # manuell startbar
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - name: Install dependencies
-        run: pip install praw textblob pandas yfinance matplotlib requests numpy
-      - name: Run tracker
+        run: pip install praw textblob pandas yfinance matplotlib requests
+      - name: Run script
         env:
           CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
@@ -18,6 +23,7 @@ jobs:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python reddit_hype_tracker.py
+
       - name: Commit updated CSV
         run: |
           git config user.email "action@github.com"
